@@ -21,5 +21,7 @@ func init() {
 	beego.Router("/album.html", &blog.MainController{}, "*:Album")
 	beego.Router("/album:page:int.html", &blog.MainController{}, "*:Album")
 
+	beego.Router("/book.html", &blog.MainController{}, "*:Book")
+
 	beego.Router("/:urlname(.+)", &blog.MainController{}, "*:Show")
 }

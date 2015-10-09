@@ -117,3 +117,9 @@ func (this *MainController) Album() {
 	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(pagesize), "/album%d.html").ToString()
 	this.display("album")
 }
+
+func (this *MainController) Book() {
+	this.setHeadMetas("游客足迹")
+	this.right = "about.html"
+	this.display("book")
+}

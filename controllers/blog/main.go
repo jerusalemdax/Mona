@@ -82,6 +82,20 @@ func (this *MainController) BlogList() {
 	}
 	this.Data["list"] = list
 	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/life%d.html").ToString()
-	this.setHeadMetas("成长录")
+	this.setHeadMetas("点点滴滴")
 	this.display("life")
+}
+
+func (this *MainController) Mood() {
+	var list []*models.Mood
+	query := new(models.Mood).Query()
+	count, _ := query.Count()
+	if count > 0 {
+		query.OrderBy("-posttime").Limit(this.pagesize, (this.page-1)*this.pagesize).All(&list)
+	}
+	this.Data["list"] = list
+	this.setHeadMetas("碎言碎语")
+	this.right = ""
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/mood%d.html").ToString()
+	this.display("mood")
 }

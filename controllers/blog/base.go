@@ -1,8 +1,11 @@
 package blog
 
 import (
-	"github.com/astaxie/beego"
+	"strconv"
 	"strings"
+
+	"github.com/astaxie/beego"
+	"github.com/jerusalemdax/Mona/models"
 )
 
 type baseController struct {
@@ -11,6 +14,34 @@ type baseController struct {
 	right    string
 	page     int
 	pagesize int
+}
+
+func (this *baseController) Prepare() {
+	this.options = models.GetOptions()
+	this.right = "right.html"
+	this.Data["options"] = this.options
+	this.Data["latestblog"] = models.GetLatestBlog()
+	this.Data["hotblog"] = models.GetHotBlog()
+	this.Data["links"] = models.GetLinks()
+	this.Data["hidejs"] = `<!--[if lt IE 9]>
+  <script src="/views/double/js/modernizr.js"></script>
+  <![endif]-->`
+
+	var (
+		pagesize int
+		err      error
+		page     int
+	)
+
+	if page, err = strconv.Atoi(this.Ctx.Input.Param(":page")); err != nil || page < 1 {
+		page = 1
+	}
+
+	if pagesize, err = strconv.Atoi(this.getOption("pagesize")); err != nil || pagesize < 1 {
+		pagesize = 10
+	}
+	this.page = page
+	this.pagesize = pagesize
 }
 
 func (this *baseController) getOption(name string) string {

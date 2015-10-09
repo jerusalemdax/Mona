@@ -34,6 +34,7 @@ func (this *MainController) Go404() {
 
 func (this *MainController) About() {
 	this.setHeadMetas("关于Judy")
+	this.right = ""
 	this.display("about")
 }
 
@@ -83,6 +84,7 @@ func (this *MainController) BlogList() {
 	this.Data["list"] = list
 	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/life%d.html").ToString()
 	this.setHeadMetas("点点滴滴")
+	this.right = ""
 	this.display("life")
 }
 

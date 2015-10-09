@@ -18,5 +18,8 @@ func init() {
 	beego.Router("/mood.html", &blog.MainController{}, "*:Mood")
 	beego.Router("/mood:page:int.html", &blog.MainController{}, "*:Mood")
 
+	beego.Router("/album.html", &blog.MainController{}, "*:Album")
+	beego.Router("/album:page:int.html", &blog.MainController{}, "*:Album")
+
 	beego.Router("/:urlname(.+)", &blog.MainController{}, "*:Show")
 }

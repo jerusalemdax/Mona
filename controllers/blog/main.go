@@ -99,3 +99,21 @@ func (this *MainController) Mood() {
 	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/mood%d.html").ToString()
 	this.display("mood")
 }
+
+func (this *MainController) Album() {
+	pagesize, _ := strconv.Atoi(this.getOption("albumsize"))
+	if pagesize < 1 {
+		pagesize = 12
+	}
+	var list []*models.Album
+	query := new(models.Album).Query().Filter("ishide", 0)
+	count, _ := query.Count()
+	if count > 0 {
+		query.OrderBy("-rank", "-posttime").Limit(pagesize, (this.page-1)*pagesize).All(&list)
+	}
+	this.setHeadMetas("美丽瞬间")
+	this.right = ""
+	this.Data["list"] = list
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(pagesize), "/album%d.html").ToString()
+	this.display("album")
+}

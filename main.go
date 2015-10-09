@@ -1,11 +1,10 @@
 package main
 
 import (
-	_ "github.com/jerusalemdax/Mona/routers"
 	"github.com/astaxie/beego"
+	_ "github.com/jerusalemdax/Mona/routers"
 )
 
 func main() {
 	beego.Run()
 }
-

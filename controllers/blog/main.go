@@ -32,6 +32,11 @@ func (this *MainController) Go404() {
 	this.display("404")
 }
 
+func (this *MainController) About() {
+	this.setHeadMetas("关于Judy")
+	this.display("about")
+}
+
 //文章显示
 func (this *MainController) Show() {
 	var (

@@ -125,3 +125,30 @@ func (this *MainController) Book() {
 	this.right = "about.html"
 	this.display("book")
 }
+
+func (this *MainController) Category() {
+	var list []*models.Post
+	tagpost := new(models.TagPost)
+	tag := new(models.Tag)
+	tag.Name = this.Ctx.Input.Param(":name")
+
+	if tag.Read("Name") != nil {
+		this.Abort("404")
+	}
+	query := tagpost.Query().Filter("tagid", tag.Id).Filter("poststatus", 0)
+	count, _ := query.Count()
+	if count > 0 {
+		var tp []*models.TagPost
+		var pids []int64 = make([]int64, 0)
+		query.OrderBy("-posttime").Limit(this.pagesize, (this.page-1)*this.pagesize).All(&tp)
+		for _, v := range tp {
+			pids = append(pids, v.Postid)
+		}
+		new(models.Post).Query().Filter("id__in", pids).All(&list)
+	}
+	this.Data["tag"] = tag
+	this.Data["list"] = list
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/category/"+tag.Name+"/page/%d").ToString()
+	this.setHeadMetas(tag.Name, tag.Name, tag.Name)
+	this.display("life")
+}

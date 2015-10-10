@@ -54,7 +54,7 @@ func (this *MainController) Show() {
 		err = post.Read()
 	}
 	if err != nil || post.Status != 0 {
-		this.Redirect("/404.html", 302)
+		this.Redirect("/404", 302)
 	}
 	post.Views++
 	post.Update("Views")
@@ -159,7 +159,7 @@ func (this *MainController) Photo() {
 	album.Id = int64(this.page)
 	err := album.Read()
 	if err != nil || album.Ishide != 0 {
-		this.Redirect("/404.html", 302)
+		this.Redirect("/404", 302)
 	}
 	this.setHeadMetas("相册 " + album.Name + " 内的照片")
 	var list []*models.Photo

@@ -10,17 +10,17 @@ func init() {
 	//前台路由
 	beego.Router("/", &blog.MainController{}, "*:Index")
 	beego.Router("/404", &blog.MainController{}, "*:Go404")
-	beego.Router("/index:page:int", &blog.MainController{}, "*:Index")
+	beego.Router("/index/:page:int", &blog.MainController{}, "*:Index")
 	beego.Router("/about", &blog.MainController{}, "*:About")
 
-	beego.Router("/life:page:int", &blog.MainController{}, "*:BlogList")
+	beego.Router("/life/:page:int", &blog.MainController{}, "*:BlogList")
 	beego.Router("/life", &blog.MainController{}, "*:BlogList")
 
 	beego.Router("/mood", &blog.MainController{}, "*:Mood")
-	beego.Router("/mood:page:int", &blog.MainController{}, "*:Mood")
+	beego.Router("/mood/:page:int", &blog.MainController{}, "*:Mood")
 
 	beego.Router("/album", &blog.MainController{}, "*:Album")
-	beego.Router("/album:page:int", &blog.MainController{}, "*:Album")
+	beego.Router("/album/:page:int", &blog.MainController{}, "*:Album")
 
 	beego.Router("/book", &blog.MainController{}, "*:Book")
 
@@ -32,7 +32,7 @@ func init() {
 
 	//照片展示
 	beego.Router("/photo", &blog.MainController{}, "*:Photo")
-	beego.Router("/photo:page:int", &blog.MainController{}, "*:Photo")
+	beego.Router("/photo/:page:int", &blog.MainController{}, "*:Photo")
 
 	beego.Router("/:urlname(.+)", &blog.MainController{}, "*:Show")
 

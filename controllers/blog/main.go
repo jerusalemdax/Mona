@@ -21,7 +21,7 @@ func (this *MainController) Index() {
 	}
 	this.Data["list"] = list
 
-	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/index%d.html").ToString()
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/index/%d").ToString()
 	this.setHeadMetas()
 	this.display("index")
 }
@@ -65,7 +65,7 @@ func (this *MainController) Show() {
 	this.Data["pre"] = pre
 	this.Data["next"] = next
 	this.Data["smalltitle"] = "文章内容"
-	if urlname == "about.html" {
+	if urlname == "about" {
 		this.Data["smalltitle"] = "关于我"
 	}
 
@@ -82,7 +82,7 @@ func (this *MainController) BlogList() {
 		query.OrderBy("-istop", "-posttime").Limit(this.pagesize, (this.page-1)*this.pagesize).All(&list)
 	}
 	this.Data["list"] = list
-	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/life%d.html").ToString()
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/life/%d").ToString()
 	this.setHeadMetas("点点滴滴")
 	this.right = ""
 	this.display("life")
@@ -98,7 +98,7 @@ func (this *MainController) Mood() {
 	this.Data["list"] = list
 	this.setHeadMetas("碎言碎语")
 	this.right = ""
-	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/mood%d.html").ToString()
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/mood/%d").ToString()
 	this.display("mood")
 }
 
@@ -116,12 +116,12 @@ func (this *MainController) Album() {
 	this.setHeadMetas("美丽瞬间")
 	this.right = ""
 	this.Data["list"] = list
-	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(pagesize), "/album%d.html").ToString()
+	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(pagesize), "/album/%d").ToString()
 	this.display("album")
 }
 
 func (this *MainController) Book() {
-	this.setHeadMetas("游客足迹")
+	this.setHeadMetas("给Judy留言")
 	this.right = "about.html"
 	this.display("book")
 }

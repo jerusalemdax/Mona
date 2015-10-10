@@ -28,7 +28,7 @@ func init() {
 
 	//后台路由
 	beego.Router("/admin", &admin.IndexController{}, "*:Index")
-	//	beego.Router("/admin/login", &admin.AccountController{}, "*:Login")
-	//	beego.Router("/admin/logout", &admin.AccountController{}, "*:Logout")
-	//	beego.Router("/admin/account/profile", &admin.AccountController{}, "*:Profile")
+	beego.Router("/admin/login", &admin.AccountController{}, "*:Login")
+	beego.Router("/admin/logout", &admin.AccountController{}, "*:Logout")
+	beego.Router("/admin/account/profile", &admin.AccountController{}, "*:Profile")
 }

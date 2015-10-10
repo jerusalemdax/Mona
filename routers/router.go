@@ -30,6 +30,10 @@ func init() {
 	beego.Router("/category/:name(.+?)", &blog.MainController{}, "*:Category")
 	beego.Router("/category/:name(.+?)/page/:page:int", &blog.MainController{}, "*:Category")
 
+	//照片展示
+	beego.Router("/photo.html", &blog.MainController{}, "*:Photo")
+	beego.Router("/photo:page:int.html", &blog.MainController{}, "*:Photo")
+
 	beego.Router("/:urlname(.+)", &blog.MainController{}, "*:Show")
 
 	//后台路由
@@ -59,4 +63,17 @@ func init() {
 	beego.Router("/admin/user/add", &admin.UserController{}, "*:Add")
 	beego.Router("/admin/user/edit", &admin.UserController{}, "*:Edit")
 	beego.Router("/admin/user/delete", &admin.UserController{}, "*:Delete")
+
+	//相册管理
+	beego.Router("/admin/album/add", &admin.AlbumController{}, "*:Add")
+	beego.Router("/admin/album/list", &admin.AlbumController{}, "*:List")
+	beego.Router("/admin/album/edit", &admin.AlbumController{}, "*:Edit")
+	beego.Router("/admin/album/delete", &admin.AlbumController{}, "*:Delete")
+
+	//照片管理
+	beego.Router("/admin/photo/list", &admin.PhotoController{}, "*:List")
+	beego.Router("/admin/photo/cover", &admin.PhotoController{}, "*:Cover")
+	beego.Router("/admin/photo/delete", &admin.PhotoController{}, "*:Delete")
+	beego.Router("/admin/photo/uploadphoto", &admin.PhotoController{}, "*:UploadPhoto")
+
 }

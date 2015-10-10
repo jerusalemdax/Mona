@@ -1,12 +1,13 @@
 package models
 
 import (
+	"crypto/md5"
+	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
-	"fmt"
-	"strings"
 	"net/url"
+	"strings"
 )
 
 func init() {
@@ -24,6 +25,12 @@ func init() {
 	if beego.AppConfig.String("runmode") == "dev" {
 		orm.Debug = true
 	}
+}
+
+func Md5(buf []byte) string {
+	hash := md5.New()
+	hash.Write(buf)
+	return fmt.Sprintf("%x", hash.Sum(nil))
 }
 
 func Rawurlencode(str string) string {

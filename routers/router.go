@@ -2,6 +2,7 @@ package routers
 
 import (
 	"github.com/astaxie/beego"
+	"github.com/jerusalemdax/Mona/controllers/admin"
 	"github.com/jerusalemdax/Mona/controllers/blog"
 )
 
@@ -24,4 +25,10 @@ func init() {
 	beego.Router("/book.html", &blog.MainController{}, "*:Book")
 
 	beego.Router("/:urlname(.+)", &blog.MainController{}, "*:Show")
+
+	//后台路由
+	beego.Router("/admin", &admin.IndexController{}, "*:Index")
+	//	beego.Router("/admin/login", &admin.AccountController{}, "*:Login")
+	//	beego.Router("/admin/logout", &admin.AccountController{}, "*:Logout")
+	//	beego.Router("/admin/account/profile", &admin.AccountController{}, "*:Profile")
 }

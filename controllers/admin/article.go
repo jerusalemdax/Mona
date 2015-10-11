@@ -290,12 +290,22 @@ func createSmallPic(file io.Reader, fileSmall string, w, h int) error {
 		return err
 	}
 	b := img.Bounds()
-	if w > b.Dx() {
-		w = b.Dx()
+	ratio1 := float32(b.Dx()) / float32(b.Dy())
+	ratio2 := float32(w) / float32(h)
+	if ratio1 > ratio2 {
+		if w > b.Dx() {
+			w = b.Dx()
+		}
+		h = int(float32(w) / ratio1)
+	} else {
+		if h > b.Dy() {
+			h = b.Dy()
+		}
+		w = int(float32(h) * ratio1)
 	}
-	if h > b.Dy() {
-		h = b.Dy()
-	}
+	fmt.Println(h)
+	fmt.Println(w)
+
 	// resize to width 1000 using Lanczos resampling
 	// and preserve aspect ratio
 	m := resize.Resize(uint(w), uint(h), img, resize.Lanczos3)

@@ -84,7 +84,7 @@ func (this *MainController) BlogList() {
 	this.Data["list"] = list
 	this.Data["pagebar"] = models.NewPager(int64(this.page), int64(count), int64(this.pagesize), "/life/%d").ToString()
 	this.setHeadMetas("点点滴滴")
-	this.right = ""
+	this.right = "right.html"
 	this.display("life")
 }
 
